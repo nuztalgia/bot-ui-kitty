@@ -1,0 +1,13 @@
+*.bak
+*.egg-info/
+*.key
+*.py[cdo]
+*.sw[a-p]
+*venv/
+.DS_Store
+.idea/
+.tox/
+.vscode/
+build/
+dist/
+site/
