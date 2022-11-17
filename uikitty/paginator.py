@@ -11,9 +11,8 @@ from uikitty.base_selector import BaseSelector
 class Paginator:
     """A helper class that displays and manages paginated options for a `BaseSelector`.
 
-    This class must be initialized with an `int` signaling how many pages to display, as
-    well as a corresponding number of lists of `SelectOption` items (where each `list`
-    represents the options that should be rendered on its page).
+    This class must be initialized with multiple lists of `SelectOption` items, in which
+    each `list` represents the options that should be rendered on an individual page.
 
     After an instance of this class is created, its `attach()` method must be called in
     order to make it functional. The provided `BaseSelector`'s `finish()` method will be
@@ -38,21 +37,31 @@ class Paginator:
 
     def __init__(
         self,
-        page_count: int,
         *options_by_page: list[SelectOption],
         placeholder: str = "Make a selection, or use the arrows for more options",
     ) -> None:
-        if page_count != len(options_by_page):
-            raise ValueError("Length of 'options_by_page' does not match 'page_count'.")
+        """Initializes a new `Paginator` instance.
 
-        self.page_count: Final[int] = page_count
+        Args:
+            *options_by_page:
+                Lists of `SelectOption` items, in which each `list` represents
+                the options that should be rendered on an individual page.
+            placeholder:
+                The placeholder text to display in the `Select` (dropdown) menu.
+
+        Raises:
+            ValueError: If fewer than `2` lists (i.e. pages) of options are provided.
+        """
+        if len(options_by_page) < 2:
+            raise ValueError("At least two lists (i.e. pages) of options are required.")
+
         self.options_by_page: Final[tuple[list[SelectOption], ...]] = options_by_page
         self.default_placeholder: Final[str] = placeholder
         self.ui: Final[Paginator.UI] = type(self).UI()
 
-        self.ui.select.callback = self.on_select
-        self.ui.prev_button.callback = self.on_prev_click
-        self.ui.next_button.callback = self.on_next_click
+        self.ui.select.callback = self._on_select
+        self.ui.prev_button.callback = self._on_prev_click
+        self.ui.next_button.callback = self._on_next_click
 
         async def uninitialized() -> None:
             raise RuntimeError("'self.refresh_view' was never properly initialized.")
@@ -62,6 +71,16 @@ class Paginator:
         self.current_selection: str | None = None
 
     def attach(self, parent_view: BaseSelector, ctx: ApplicationContext) -> None:
+        """Adds pagination UI components to the view and sets up the required callbacks.
+
+        Args:
+            parent_view:
+                The `BaseSelector` view to which these UI components will be added.
+                Once a selection is made, this view's `finish()` method will be called.
+            ctx:
+                The context for the application command that prompted this selection.
+        """
+
         async def on_confirm(interaction: Interaction) -> None:
             if isinstance(self.current_selection, str):
                 await parent_view.finish(self.current_selection, interaction)
@@ -70,39 +89,40 @@ class Paginator:
 
         self.refresh_view = functools.partial(ctx.edit, view=parent_view)
         self.ui.center_button.callback = on_confirm
-        self.update_ui()
+        self._update_ui()
 
         for component in self.ui:
             parent_view.add_item(component)
 
     @property
-    def has_selection(self) -> bool:
+    def _has_selection(self) -> bool:
         return self.current_selection is not None
 
-    async def on_select(self, interaction: Interaction) -> None:
+    async def _on_select(self, interaction: Interaction) -> None:
         self.current_selection = self.ui.select.values[0]
-        await self.on_interaction(interaction)
+        await self._on_interaction(interaction)
 
-    async def on_prev_click(self, interaction: Interaction) -> None:
+    async def _on_prev_click(self, interaction: Interaction) -> None:
         self.current_page -= 1
         self.current_selection = None
-        await self.on_interaction(interaction)
+        await self._on_interaction(interaction)
 
-    async def on_next_click(self, interaction: Interaction) -> None:
+    async def _on_next_click(self, interaction: Interaction) -> None:
         self.current_page += 1
         self.current_selection = None
-        await self.on_interaction(interaction)
+        await self._on_interaction(interaction)
 
-    async def on_interaction(self, interaction: Interaction) -> None:
+    async def _on_interaction(self, interaction: Interaction) -> None:
         await interaction.response.defer()
-        self.update_ui()
+        self._update_ui()
         await self.refresh_view()
 
-    def update_ui(self) -> None:
+    def _update_ui(self) -> None:
+        page_count = len(self.options_by_page)
         options = self.options_by_page[self.current_page]
-        center_button_label = f"Page {self.current_page + 1} of {self.page_count}"
+        center_button_label = f"Page {self.current_page + 1} of {page_count}"
 
-        if self.has_selection:
+        if self._has_selection:
             self.ui.select.placeholder = self.current_selection
             self.ui.select.options = [
                 option for option in options if (option.label != self.current_selection)
@@ -118,4 +138,4 @@ class Paginator:
             self.ui.center_button.disabled = True
 
         self.ui.prev_button.disabled = self.current_page == 0
-        self.ui.next_button.disabled = self.current_page == (self.page_count - 1)
+        self.ui.next_button.disabled = self.current_page == (page_count - 1)

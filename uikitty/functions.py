@@ -62,10 +62,10 @@ async def dynamic_select(
             An embed to display in the message with the selector view.
             Optional. May be used alongside `content`.
         button_style:
-            The `ButtonStyle` to use for all option buttons.
+            The `ButtonStyle` to use for the option `Button` components.
             Only applicable if there are between 2 and 5 options (inclusive).
         select_placeholder:
-            The placeholder text to display in the `Select` menu.
+            The placeholder text to display in the `Select` (dropdown) component.
             Only applicable if there are between 6 and 25 options (inclusive).
         log:
             A function that will be called to display debug information in the console.
