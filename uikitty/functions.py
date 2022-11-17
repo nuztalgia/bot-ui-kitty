@@ -3,7 +3,7 @@ from typing import Any
 
 from discord import ApplicationContext, ButtonStyle, Embed
 
-from uikitty.dynamic_selector import MIN_OPTIONS_FOR_UI, DynamicSelector
+from uikitty.dynamic_selector import DynamicSelector
 
 
 async def dynamic_select(
@@ -24,7 +24,7 @@ async def dynamic_select(
 
     options = kwargs if kwargs else {arg: arg for arg in args}
 
-    if len(options) < MIN_OPTIONS_FOR_UI:
+    if len(options) < DynamicSelector.MIN_OPTIONS:
         return next(iter(options.values())) if options else None
 
     view = DynamicSelector(ctx, button_style, select_placeholder, log, options)

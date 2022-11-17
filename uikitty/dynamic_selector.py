@@ -9,12 +9,12 @@ from discord.ui import Button, Select
 from uikitty.base_selector import BaseSelector
 from uikitty.paginator import Paginator
 
-MAX_ENTRIES_PER_SELECT: Final[int] = 25
-MAX_BUTTONS_PER_ROW: Final[int] = 5
-MIN_OPTIONS_FOR_UI: Final[int] = 2
-
 
 class DynamicSelector(BaseSelector):
+    MAX_ENTRIES_PER_PAGE: Final[int] = 25
+    MAX_BUTTONS_PER_ROW: Final[int] = 5
+    MIN_OPTIONS: Final[int] = 2
+
     def __init__(
         self,
         ctx: ApplicationContext,
@@ -24,23 +24,24 @@ class DynamicSelector(BaseSelector):
         options: dict[str, Any],
     ) -> None:
         super().__init__(log=log, options=options)
+        cls = type(self)
 
         match len(self.options):
-            case n if n > MAX_ENTRIES_PER_SELECT:
-                page_count = math.ceil(n / MAX_ENTRIES_PER_SELECT)
+            case n if n > cls.MAX_ENTRIES_PER_PAGE:
+                page_count = math.ceil(n / cls.MAX_ENTRIES_PER_PAGE)
                 self.log(
                     f"Setting up a paginated selector with {n} "
                     f"options spread across {page_count} pages."
                 )
                 self.setup_paginator(ctx, page_count)
-            case n if n > MAX_BUTTONS_PER_ROW:
+            case n if n > cls.MAX_BUTTONS_PER_ROW:
                 self.log(f"Setting up a simple dropdown menu with {n} options.")
                 self.setup_simple_select(select_placeholder)
-            case n if n >= MIN_OPTIONS_FOR_UI:
+            case n if n >= cls.MIN_OPTIONS:
                 self.log(f"Setting up an action row of {n} buttons.")
                 self.setup_simple_buttons(button_style)
             case _:
-                raise ValueError(f"At least {MIN_OPTIONS_FOR_UI} options are required.")
+                raise ValueError(f"At least {cls.MIN_OPTIONS} options are required.")
 
     def setup_simple_buttons(self, style: ButtonStyle) -> None:
         for key in self.options:
