@@ -9,11 +9,32 @@ from uikitty.base_selector import BaseSelector
 
 
 class Paginator:
+    """A helper class that displays and manages paginated options for a `BaseSelector`.
+
+    This class must be initialized with an `int` signaling how many pages to display, as
+    well as a corresponding number of lists of `SelectOption` items (where each `list`
+    represents the options that should be rendered on its page).
+
+    After an instance of this class is created, its `attach()` method must be called in
+    order to make it functional. The provided `BaseSelector`'s `finish()` method will be
+    called asynchronously once the user selects an option and confirms their choice.
+    """
+
     class UI(NamedTuple):
+        """A `NamedTuple` containing the individual UI components in a `Paginator`."""
+
         select: Select = Select()
+        """A dropdown menu containing all the available options on the current page."""
+
         prev_button: Button = Button(style=ButtonStyle.primary, label="<<")
+        """Navigates to the previous page when clicked. Disabled when on first page."""
+
         center_button: Button = Button()
+        """Confirms the selected option when clicked. Disabled if no option is selected.
+           While disabled, will show information about the current pagination state."""
+
         next_button: Button = Button(style=ButtonStyle.primary, label=">>")
+        """Navigates to the next page when clicked. Disabled when on last page."""
 
     def __init__(
         self,

@@ -11,6 +11,8 @@ from uikitty.paginator import Paginator
 
 
 class DynamicSelector(BaseSelector):
+    """A `BaseSelector` view whose appearance is determined by the number of options."""
+
     MAX_ENTRIES_PER_PAGE: Final[int] = 25
     MAX_BUTTONS_PER_ROW: Final[int] = 5
     MIN_OPTIONS: Final[int] = 2

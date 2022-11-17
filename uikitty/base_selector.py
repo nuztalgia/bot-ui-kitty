@@ -6,6 +6,8 @@ from discord.ui import View
 
 
 class BaseSelector(View):
+    """Base class for views that let the user pick from a set of predefined options."""
+
     def __init__(
         self,
         log: Callable[[str], None] | None,

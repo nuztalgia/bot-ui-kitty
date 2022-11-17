@@ -33,7 +33,7 @@ profile = "black"
 
 [tool.pydocstyle]
 convention = "google"
-add-ignore = "D1"
+add-ignore = ["D100", "D102", "D107"]
 
 [tool.setuptools]
 packages = ["uikitty"]
