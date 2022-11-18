@@ -59,11 +59,103 @@ using a [virtual env] is highly recommended.
   https://pip.pypa.io/en/stable/topics/local-project-installs/#editable-installs
 [virtual env]: https://docs.python.org/3/tutorial/venv.html
 
-## Components
+## Available Views
 
-- [Dynamic Selector](https://github.com/nuztalgia/bot-ui-kitty/blob/aa9d33d7dc2e6658a93c45a8a48a85aaf74d5b96/uikitty/functions.py#L9-L36)
+### Dynamic Select
 
-_Screenshots and usage info coming soon!_
+This view is designed to handle any use case that calls for selecting a single
+item from a sequence of possible options. It'll automatically choose to display
+either a row of buttons, a dropdown menu, or a combination of both (to emulate
+pagination) depending on the **number of options** you throw at it! 🤹
+
+- **Example 1:** Choose your starter Pokemon! (**3** options)
+
+  <img align="left" src="https://user-images.githubusercontent.com/95021853/202794482-60a5ca50-7593-4f66-a160-3ba1509d4d84.png">
+
+  And after clicking the <kbd>💧 Squirtle</kbd> button...
+
+  ![image](https://user-images.githubusercontent.com/95021853/202794731-4586fcfd-e59d-42d2-b3d4-8bb410b8def7.png)
+
+  ```py
+  number = await uikitty.dynamic_select(
+      ctx,
+      content="Choose your starter Pokemon!",
+      **{"🌱 Bulbasaur": 1, "🔥 Charmander": 4, "💧 Squirtle": 7},
+  )
+  await ctx.edit(content=f"Your Pokemon's number is **#00{number}**!", view=None)
+  ```
+
+  ***
+
+- **Example 2:** What time is it, Mr. Wolf? (**24** options)
+
+  <img align="right" src="https://user-images.githubusercontent.com/95021853/202796751-5f541611-4806-4918-ad34-aa347f92b807.png" width=300>
+
+  ![image](https://user-images.githubusercontent.com/95021853/202798098-196a1976-c326-4096-870a-89593f613fa1.png)
+
+  <details>
+  <summary>
+  This selection appears as a dropdown menu... but no matter what time it is,
+  this particular wolf is always hungry! <i>(Click to see spoilers.)</i><p></p>
+  </summary>
+  <img src="https://user-images.githubusercontent.com/95021853/202798702-cb7d88e1-4c6e-488e-aa0a-5a93e969a2a3.png">
+  </details>
+
+  ```py
+  time = await uikitty.dynamic_select(
+      ctx,
+      *[f"{str(i).zfill(2)}:00" for i in range(24)],
+      select_placeholder="What time is it, Mr. Wolf?",
+  )
+  await ctx.edit(content=f"It's ~~{time}~~ **DINNER TIME!!!**", view=None)
+  ```
+
+  ***
+
+- **Example 3:** I heard you like chemistry... (**119** options)
+
+  <img align="right" src="https://user-images.githubusercontent.com/95021853/202812334-ac9ee8a9-3083-4276-b0b2-edbcf8cef30e.png">
+
+  This is where things get interesting! ✨
+
+  - When you pass more than 25 options into a **Dynamic Select** view, they'll
+    be evenly divided into "pages".
+  - The options for the current page are displayed in the dropdown menu.
+  - You can change the current page by clicking the <kbd><<</kbd> and
+    <kbd>>></kbd> buttons.
+
+  Here's what this example looks like on the first page, middle page, and last
+  page. Notice that the <kbd><<</kbd> button is disabled on the first page, the
+  <kbd>>></kbd> button is disabled on the last page, and the center button is
+  always disabled.
+
+  <img align="left" src="https://user-images.githubusercontent.com/95021853/202810734-38a2bbaa-dc09-49d5-985b-2e79083c8ecc.png" width=250>
+  <img align="right" src="https://user-images.githubusercontent.com/95021853/202811225-7e02d68e-1865-4bff-9d0e-dd43f1bcbfe8.png" width=250>
+  <p align="center"><img src="https://user-images.githubusercontent.com/95021853/202811048-1804731c-4f9d-455c-9137-ce4a02850b01.png" width=250></p>
+
+  When you select an option in the dropdown, the center button will light up,
+  allowing you to confirm your choice.
+
+  <img align="right" src="https://user-images.githubusercontent.com/95021853/202820828-89776e90-fc09-45d3-a95f-3dbdb06cedbc.png" height=212>
+
+  ![image](https://user-images.githubusercontent.com/95021853/202818792-4554f2a7-ec01-4057-9537-2c398a020ebf.png)
+
+  ```py
+  element = await uikitty.dynamic_select(
+      ctx,
+      embed=Embed(title="Select an element to learn more about it!", color=color),
+      **elements_data,
+  )
+  embed = Embed(
+      title=element["name"], description=element["summary"], url=element["source"],
+  )
+  await ctx.edit(embed=embed, view=None)
+  ```
+
+  **Note:** `elements_data` in the above snippet is sourced from
+  [Bowserinator/Periodic-Table-JSON][periodic-table-json].
+
+[periodic-table-json]: https://github.com/Bowserinator/Periodic-Table-JSON
 
 ## License
 
