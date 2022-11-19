@@ -69,7 +69,6 @@ repos:
     hooks:
       - id: pydocstyle
         additional_dependencies: ["toml"]
-        exclude: ^examples/.+\.py$
 
   - repo: https://github.com/pre-commit/mirrors-mypy
     rev: v0.991
@@ -102,6 +101,6 @@ repos:
       - id: fix-spaces
 
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: 0.19.1
+    rev: 0.19.2
     hooks:
       - id: check-github-workflows

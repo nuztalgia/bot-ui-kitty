@@ -39,7 +39,7 @@ pip install -U bot-ui-kitty
 ```
 
 **Note:** Python **3.10** is required (because Pycord doesn't officially support
-Python 3.11... [yet]!)
+Python 3.11... [yet].)
 
 [yet]: https://github.com/Pycord-Development/pycord/blob/master/CHANGELOG.md
 
@@ -53,7 +53,7 @@ pip install -e .
 
 This will create an [editable installation] of `bot-ui-kitty` in your current
 environment. Any changes you make to the code will immediately take effect, so
-using a [virtual env] is highly recommended.
+using a [virtual env] is highly recommended!
 
 [editable installation]:
   https://pip.pypa.io/en/stable/topics/local-project-installs/#editable-installs
@@ -72,7 +72,7 @@ pagination) depending on the **number of options** you throw at it! 🤹
 
   <img align="left" src="https://user-images.githubusercontent.com/95021853/202794482-60a5ca50-7593-4f66-a160-3ba1509d4d84.png">
 
-  And after clicking the <kbd>💧 Squirtle</kbd> button...
+  **Bonus:** After clicking the <kbd>💧 Squirtle</kbd> button...
 
   ![image](https://user-images.githubusercontent.com/95021853/202794731-4586fcfd-e59d-42d2-b3d4-8bb410b8def7.png)
 
@@ -155,7 +155,11 @@ pagination) depending on the **number of options** you throw at it! 🤹
   **Note:** `elements_data` in the above snippet is sourced from
   [Bowserinator/Periodic-Table-JSON][periodic-table-json].
 
-[periodic-table-json]: https://github.com/Bowserinator/Periodic-Table-JSON
+  [periodic-table-json]: https://github.com/Bowserinator/Periodic-Table-JSON
+
+  ***
+
+More types of views will be coming soon. Watch this space! 👀
 
 ## License
 

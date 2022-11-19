@@ -31,20 +31,20 @@ async def dynamic_select(
         The appearance/behavior of the view rendered by this function (if any)
         is determined by the number of options that are provided:
 
-        - If there are no options, this function will simply return `None`.
+        - If there are **no** options, this function will simply return `None`.
 
-        - If there is exactly `1` option, this function will return that option (if
+        - If there is **exactly 1** option, this function will return that option (if
           specified via `*args`) or the option's value (if specified via `**kwargs`).
 
-        - If there are between `2` and `5` options (inclusive), they will be displayed
+        - If there are **between 2 and 5** options (inclusive), they will be displayed
           as a single row of `Button` components (one button per option). This function
           will return the selected option (or its value) once the user clicks a button.
 
-        - If there are between `6` and `25` options (inclusive), they will be displayed
+        - If there are **between 6 and 25** options (inclusive), they will be displayed
           in a single `Select` component. This function will return the selected option
           (or its value) once the user clicks an item in the dropdown menu.
 
-        - If there are more than `26` options, they will be evenly divided into pages
+        - If there are **26 or more** options, they will be evenly divided into pages
           and displayed in a composite `Paginator` view. This function will return the
           selected option (or its value) once the user selects it (using the `Select`
           component) and confirms their choice (using the central `Button` component).

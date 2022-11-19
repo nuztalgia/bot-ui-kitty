@@ -45,15 +45,17 @@ class DynamicSelectCog(Cog):
             await ctx.response.defer()
             await self._fetch_elements()
 
+        color = ctx.guild.me.color
         element = await uikitty.dynamic_select(
             ctx,
-            embed=Embed(title="Select an element to learn more about it!"),
+            embed=Embed(title="Select an element to learn more about it!", color=color),
             **self.elements_data,
         )
         embed = Embed(
             title=element["name"],
             description=element["summary"],
             url=element["source"],
+            color=color,
         )
         await ctx.edit(embed=embed, view=None)
 
