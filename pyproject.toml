@@ -25,6 +25,7 @@ classifiers = [
     "Topic :: Utilities",
     "Typing :: Typed",
 ]
+keywords = ["bot", "components", "discord", "kitty", "ui", "ui kit", "utilities", "views"]
 dynamic = ["dependencies", "urls", "version"]
 
 [tool.black]
@@ -37,9 +38,3 @@ profile = "black"
 convention = "google"
 add-ignore = ["D100", "D417"]
 match = "uikitty/.*\\.py"
-
-[tool.setuptools]
-packages = ["uikitty"]
-
-[tool.setuptools_scm]
-local_scheme = "no-local-version"
