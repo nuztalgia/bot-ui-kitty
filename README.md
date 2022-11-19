@@ -1,6 +1,6 @@
 # 😻 Bot UI Kitty
 
-[![Development Status](https://img.shields.io/pypi/status/bot-ui-kitty)](https://pypi.org/project/bot-ui-kitty/)
+[![Development Status](https://img.shields.io/pypi/status/bot-ui-kitty?color=orange)](https://pypi.org/project/bot-ui-kitty/)
 [![Latest Version on PyPI](https://img.shields.io/pypi/v/bot-ui-kitty)](https://pypi.org/project/bot-ui-kitty/)
 [![Supported Python Versions](https://img.shields.io/pypi/pyversions/bot-ui-kitty)](https://pypi.org/project/bot-ui-kitty/)
 [![Build Status](https://img.shields.io/github/workflow/status/nuztalgia/bot-ui-kitty/Build)](https://github.com/nuztalgia/bot-ui-kitty/actions/workflows/build.yml)
