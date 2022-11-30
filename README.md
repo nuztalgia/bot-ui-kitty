@@ -15,10 +15,10 @@ Discord bots, but I decided to make it more easily accessible just in case other
 bot developers find it helpful. 💜
 
 Currently, the only supported Discord library is **[Pycord]**, because that's
-the one that most of my bots happen to use. I'm planning to extend support to
-other libraries too, but I'm not sure when I'll be able to make the time to do
-so. 📚 In the meantime, if you're using a different library, check out my other
-utility kit for Discord bots – **[Botstrap]**!
+the one that most of my bots happen to use. I'd love to extend support to other
+libraries too, but I'm not sure when I'll be able to make the time to do so. In
+the meantime, if you're using a different library, check out my other utility
+kit for Discord bots – **[Botstrap]**!
 
 [pycord]: https://github.com/Pycord-Development/pycord
 [botstrap]: https://github.com/nuztalgia/botstrap
@@ -38,10 +38,8 @@ keep it green and healthy. ✅
 pip install -U bot-ui-kitty
 ```
 
-**Note:** Python **3.10** is required (because Pycord doesn't officially support
-Python 3.11... [yet].)
-
-[yet]: https://github.com/Pycord-Development/pycord/blob/master/CHANGELOG.md
+Python **3.10** or higher is required. It's also generally a good idea to
+upgrade pip (`python -m pip install -U pip`).
 
 ### For Development
 
@@ -124,6 +122,14 @@ pagination) depending on the **number of options** you throw at it! 🤹
   - You can change the current page by clicking the <kbd><<</kbd> and
     <kbd>>></kbd> buttons.
 
+  <p>
+  <details>
+  <summary>
+  Expand this section to see more screenshots and details about the
+  pagination/selection interface! 📖
+  </summary>
+  <p></p>
+
   Here's what this example looks like on the first page, middle page, and last
   page. Notice that the <kbd><<</kbd> button is disabled on the first page, the
   <kbd>>></kbd> button is disabled on the last page, and the center button is
@@ -139,6 +145,9 @@ pagination) depending on the **number of options** you throw at it! 🤹
   <img align="right" src="https://user-images.githubusercontent.com/95021853/202820828-89776e90-fc09-45d3-a95f-3dbdb06cedbc.png" height=212>
 
   ![image](https://user-images.githubusercontent.com/95021853/202818792-4554f2a7-ec01-4057-9537-2c398a020ebf.png)
+
+  </details>
+  </p>
 
   ```py
   element = await uikitty.dynamic_select(

@@ -12,4 +12,7 @@ This issue lists Renovate updates and detected dependencies. See the Renovate \
 [docs](https://docs.renovatebot.com/key-concepts/dashboard/) and/or the \
 [job log](https://app.renovatebot.com/dashboard#github/nuztalgia/bot-ui-kitty) \
 for more information.",
+  pip_requirements: {
+    fileMatch: ["examples/requirements.txt"],
+  },
 }

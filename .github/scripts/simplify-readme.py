@@ -11,7 +11,7 @@ def get_github_link(header: str) -> str:
 
 
 def main() -> int:
-    readme_file = (Path(__file__) / "../../README.md").resolve()
+    readme_file = (Path(__file__) / "../../../README.md").resolve()
     readme_text = readme_file.read_text()
 
     # Currently, "Available Views" is the only section that needs to be simplified.
