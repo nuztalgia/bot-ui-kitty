@@ -2,8 +2,8 @@
   $schema: "https://docs.renovatebot.com/renovate-schema.json",
   extends: [
     "config:base",
-    "schedule:weekly",
     "group:allNonMajor",
+    "schedule:weekly",
     ":automergeMinor",
   ],
   dependencyDashboardAutoclose: true,
@@ -12,7 +12,10 @@ This issue lists Renovate updates and detected dependencies. See the Renovate \
 [docs](https://docs.renovatebot.com/key-concepts/dashboard/) and/or the \
 [job log](https://app.renovatebot.com/dashboard#github/nuztalgia/bot-ui-kitty) \
 for more information.",
+  automergeType: "branch",
+  ignoreTests: true,
+  enabledManagers: ["github-actions", "pip_requirements", "pip_setup"],
   pip_requirements: {
-    fileMatch: ["examples/requirements.txt"],
+    ignorePaths: [],
   },
 }
