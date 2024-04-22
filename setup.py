@@ -7,7 +7,7 @@ setup(
         "Source Code": "https://github.com/nuztalgia/bot-ui-kitty/tree/main/uikitty",
     },
     install_requires=[
-        "py-cord ==2.4.1",
+        "py-cord ==2.5.0",
     ],
     use_scm_version={
         "local_scheme": lambda version: str(version.tag),
