@@ -49,9 +49,10 @@ cd bot-ui-kitty
 pip install -e .
 ```
 
-This will create an [editable installation] of `bot-ui-kitty` in your current
-environment. Any changes you make to the code will immediately take effect, so
-using a [virtual env] is highly recommended!
+This will create an [editable installation] of `bot-ui-kitty` in your current environment.
+Any changes you make to the code will immediately take effect, so using a [virtual
+env]
+is highly recommended!
 
 [editable installation]:
   https://pip.pypa.io/en/stable/topics/local-project-installs/#editable-installs
