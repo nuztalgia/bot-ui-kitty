@@ -41,9 +41,9 @@ it.
 
 ### Licensing
 
-This project uses the [Apache License, Version 2.0]. All contributions to this
-project's codebase **must** adhere to that license, as stipulated by the
-[`LICENSE`](/LICENSE) file in this repository.
+This project uses the [Apache License, Version 2.0]. All contributions to this project's
+codebase **must** adhere to that license, as stipulated by the [`LICENSE`](/LICENSE)
+file in this repository.
 
 Furthermore, by submitting a pull request to this project, you certify that you
 authored or otherwise have the necessary rights to submit **all** of the code
