@@ -115,7 +115,6 @@ pagination) depending on the **number of options** you throw at it! 🤹
   <img align="right" src="https://user-images.githubusercontent.com/95021853/202812334-ac9ee8a9-3083-4276-b0b2-edbcf8cef30e.png">
 
   This is where things get interesting! ✨
-
   - When you pass more than 25 options into a **Dynamic Select** view, they'll
     be evenly divided into "pages".
   - The options for the current page are displayed in the dropdown menu.
